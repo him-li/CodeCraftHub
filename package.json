@@ -2,23 +2,42 @@
   "name": "codecrafthub",
   "version": "1.0.0",
   "description": "Full-stack personal learning goal tracker",
-  "main": "app.js",
+  "type": "module",
+  "main": "server.ts",
   "engines": {
     "node": ">=20.19.0"
   },
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "node --watch app.js",
-    "dev:web": "vite --config frontend/vite.config.js",
-    "build": "vite build --config frontend/vite.config.js",
+    "dev:api": "tsx watch server.ts",
+    "dev:web": "vite --config frontend/vite.config.ts",
+    "typecheck": "tsc -p tsconfig.json && tsc -p frontend/tsconfig.json",
+    "test": "vitest run --config frontend/vite.config.ts",
+    "build": "npm run typecheck && vite build --config frontend/vite.config.ts",
     "prestart": "npm run build",
-    "start": "node app.js"
+    "start": "tsx server.ts"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
     "concurrently": "^9.2.1",
-    "vite": "^7.1.7"
+    "jsdom": "^27.0.0",
+    "tailwindcss": "^4.1.13",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7",
+    "vitest": "^5.0.1"
   }
 }

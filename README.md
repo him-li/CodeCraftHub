@@ -1,14 +1,15 @@
 # CodeCraftHub
 
 CodeCraftHub is a beginner-friendly full-stack application for tracking
-personal learning goals. Its Vite frontend talks to a Node.js and Express REST
-API, which stores course data in a local `courses.json` file. No database or
-user account setup is required.
+personal learning goals. Its React and TypeScript frontend uses Tailwind CSS
+and talks to a TypeScript Express REST API, which stores course data in a local
+`courses.json` file. No database or user account setup is required locally.
 
 ## Features
 
 - Create, view, update, and delete courses
-- Use the learning dashboard in a browser
+- Use a responsive React learning dashboard in a browser
+- Develop with TypeScript and Tailwind CSS
 - Develop the frontend with Vite and automatic reloads
 - Automatically generate numeric course IDs starting at `1`
 - Automatically add a `created_at` timestamp to new courses
@@ -84,14 +85,41 @@ the project directory. Stop the processes by pressing `Ctrl+C` in the terminal.
 
 ```text
 CodeCraftHub/
-├── app.js                 # Express API and production frontend server
+├── server.ts              # Express API and production frontend server
 ├── package.json           # Shared frontend/backend commands and dependencies
+├── tsconfig.json          # Backend TypeScript configuration
 ├── courses.json           # Runtime data; generated automatically and ignored
+├── vercel.json            # Vercel build configuration
 └── frontend/
     ├── index.html         # Vite entry point and dashboard
-    ├── vite.config.js     # Vite server, build, and API proxy configuration
-    └── assets/            # Static images, icons, and fonts
+    ├── vite.config.ts     # Vite, React, Tailwind, tests, and API proxy
+    ├── tsconfig.json      # Frontend TypeScript configuration
+    └── src/               # React components, API client, styles, and tests
 ```
+
+## Testing
+
+Run the React component tests:
+
+```bash
+npm test
+```
+
+Check both frontend and backend TypeScript:
+
+```bash
+npm run typecheck
+```
+
+## Vercel deployment
+
+The project exports its Express application from `server.ts` and builds the
+React frontend into `public/`, allowing Vercel to deploy both layers together.
+
+> **Important:** Vercel Functions do not provide durable local filesystem
+> storage. The JSON-file API is suitable for local learning, but production
+> course changes may disappear between serverless invocations. Use durable
+> storage such as Vercel Blob or a database before relying on production data.
 
 ## Course format
 
