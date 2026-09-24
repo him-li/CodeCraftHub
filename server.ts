@@ -19,7 +19,11 @@ type CourseInput = Pick<Course, "name" | "description" | "target_date" | "status
 const app = express();
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT) || 5000;
-const COURSES_FILE = process.env.COURSES_FILE || path.join(currentDirectory, "courses.json");
+const COURSES_FILE = process.env.COURSES_FILE || (
+  process.env.VERCEL
+    ? path.join("/tmp", "codecrafthub-courses.json")
+    : path.join(currentDirectory, "courses.json")
+);
 const FRONTEND_DIST = path.join(currentDirectory, "public");
 const VALID_STATUSES: CourseStatus[] = ["Not Started", "In Progress", "Completed"];
 
