@@ -18,3 +18,5 @@ courses.json
 *.log
 npm-debug.log*
 .DS_Store
+.vercel
+.env*
