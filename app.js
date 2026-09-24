@@ -10,6 +10,7 @@ const app = express();
 // or environments where port 5000 is already being used by another program.
 const PORT = process.env.PORT || 5000;
 const COURSES_FILE = path.join(__dirname, "courses.json");
+const FRONTEND_DIST = path.join(__dirname, "frontend", "dist");
 const VALID_STATUSES = ["Not Started", "In Progress", "Completed"];
 
 // This middleware converts JSON request bodies into JavaScript objects.
@@ -251,6 +252,17 @@ app.delete("/api/courses/:id", async (req, res, next) => {
   }
 });
 
+// Serve the production Vite build from the same Express application.
+// During development, Vite runs separately and proxies /api requests here.
+app.use(express.static(FRONTEND_DIST));
+
+// The dashboard currently has one page, served at the application root.
+app.get("/", (req, res, next) => {
+  res.sendFile(path.join(FRONTEND_DIST, "index.html"), (error) => {
+    if (error) next(error);
+  });
+});
+
 // Return JSON for unknown routes instead of Express's default HTML response.
 app.use((req, res) => {
   res.status(404).json({ error: "Endpoint not found" });
@@ -261,6 +273,12 @@ app.use((req, res) => {
 app.use((error, req, res, next) => {
   if (error instanceof SyntaxError && error.status === 400 && "body" in error) {
     return res.status(400).json({ error: "Request body contains invalid JSON" });
+  }
+
+  if (error.code === "ENOENT" && req.path === "/") {
+    return res.status(503).json({
+      error: "Frontend build not found. Run npm run build first.",
+    });
   }
 
   console.error("Server error:", error.message);

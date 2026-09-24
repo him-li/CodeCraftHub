@@ -1,5 +1,6 @@
 # Installed dependencies
 node_modules/
+frontend/dist/
 
 # Runtime course data (created automatically by app.js)
 courses.json
@@ -12,4 +13,3 @@ courses.json
 *.log
 npm-debug.log*
 .DS_Store
-

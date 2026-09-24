@@ -1,12 +1,15 @@
 # CodeCraftHub
 
-CodeCraftHub is a beginner-friendly REST API for tracking personal learning
-goals. It is built with Node.js and Express and stores course data in a local
-`courses.json` file, so no database or user account setup is required.
+CodeCraftHub is a beginner-friendly full-stack application for tracking
+personal learning goals. Its Vite frontend talks to a Node.js and Express REST
+API, which stores course data in a local `courses.json` file. No database or
+user account setup is required.
 
 ## Features
 
 - Create, view, update, and delete courses
+- Use the learning dashboard in a browser
+- Develop the frontend with Vite and automatic reloads
 - Automatically generate numeric course IDs starting at `1`
 - Automatically add a `created_at` timestamp to new courses
 - Validate required course fields
@@ -17,7 +20,7 @@ goals. It is built with Node.js and Express and stores course data in a local
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) 18 or later
+- [Node.js](https://nodejs.org/) 20.19 or later
 - npm, which is included with Node.js
 
 Check that both are installed:
@@ -43,20 +46,52 @@ npm --version
 
 ## Running the application
 
-Start the server with:
+### Development
+
+Run the Vite frontend and Express API together:
+
+```bash
+npm run dev
+```
+
+Open the dashboard at:
+
+```text
+http://localhost:5173
+```
+
+Vite proxies `/api` requests to the Express API at `http://localhost:5000`.
+
+### Production-style build
+
+Build the frontend and serve the complete application through Express:
 
 ```bash
 npm start
 ```
 
-The API will be available at:
+The dashboard and API will be available at:
 
 ```text
 http://localhost:5000
 ```
 
-On its first run, the application creates a `courses.json` file in the project
-directory. Stop the server by pressing `Ctrl+C` in the terminal.
+The `prestart` script automatically creates the optimized Vite build before the
+server starts. On its first run, the application also creates `courses.json` in
+the project directory. Stop the processes by pressing `Ctrl+C` in the terminal.
+
+## Project structure
+
+```text
+CodeCraftHub/
+├── app.js                 # Express API and production frontend server
+├── package.json           # Shared frontend/backend commands and dependencies
+├── courses.json           # Runtime data; generated automatically and ignored
+└── frontend/
+    ├── index.html         # Vite entry point and dashboard
+    ├── vite.config.js     # Vite server, build, and API proxy configuration
+    └── assets/            # Static images, icons, and fonts
+```
 
 ## Course format
 
