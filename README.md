@@ -9,6 +9,7 @@ and talks to a TypeScript Express REST API, which stores course data in a local
 
 - Create, view, update, and delete courses
 - Use a responsive React learning dashboard in a browser
+- Present the AI-assisted build process on a dedicated prompt journey page
 - Develop with TypeScript and Tailwind CSS
 - Develop the frontend with Vite and automatic reloads
 - Automatically generate numeric course IDs starting at `1`
@@ -61,6 +62,14 @@ Open the dashboard at:
 http://localhost:5173
 ```
 
+The prompt engineering showcase is available at:
+
+```text
+http://localhost:5173/prompts
+```
+
+Add your real prompts and reflections in `frontend/src/content/prompts.ts`.
+
 Vite proxies `/api` requests to the Express API at `http://localhost:5000`.
 
 ### Production-style build
@@ -94,7 +103,7 @@ CodeCraftHub/
     ├── index.html         # Vite entry point and dashboard
     ├── vite.config.ts     # Vite, React, Tailwind, tests, and API proxy
     ├── tsconfig.json      # Frontend TypeScript configuration
-    └── src/               # React components, API client, styles, and tests
+    └── src/               # React pages, prompt content, API client, and tests
 ```
 
 ## Testing

@@ -178,7 +178,7 @@ app.delete("/api/courses/:id", async (req, res, next) => {
 });
 
 app.use(express.static(FRONTEND_DIST));
-app.get("/", (_req, res, next) => {
+app.get(["/", "/prompts"], (_req, res, next) => {
   res.sendFile(path.join(FRONTEND_DIST, "index.html"), (error) => (error ? next(error) : undefined));
 });
 app.use((_req, res) => res.status(404).json({ error: "Endpoint not found" }));
@@ -187,7 +187,7 @@ app.use((error: Error & { code?: string; status?: number; body?: unknown }, req:
   if (error instanceof SyntaxError && error.status === 400 && "body" in error) {
     return res.status(400).json({ error: "Request body contains invalid JSON" });
   }
-  if (error.code === "ENOENT" && req.path === "/") {
+  if (error.code === "ENOENT" && ["/", "/prompts"].includes(req.path)) {
     return res.status(503).json({ error: "Frontend build not found. Run npm run build first." });
   }
   console.error("Server error:", error.message);

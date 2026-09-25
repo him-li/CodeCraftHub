@@ -3,6 +3,7 @@ import { courseApi } from "./api";
 import { CourseCard } from "./components/CourseCard";
 import { CourseForm } from "./components/CourseForm";
 import { Modal } from "./components/Modal";
+import { SiteNav } from "./components/SiteNav";
 import type { Course, CourseInput, CourseStatus } from "./types";
 
 export default function App() {
@@ -82,8 +83,9 @@ export default function App() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="overflow-hidden bg-slate-950 px-5 py-14 text-white">
-        <div className="mx-auto max-w-6xl">
+      <header className="overflow-hidden bg-slate-950 text-white">
+        <SiteNav current="dashboard" />
+        <div className="mx-auto max-w-6xl px-5 pb-16 pt-10">
           <span className="rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-200">Developer learning hub</span>
           <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-6xl">Build skills with intention.</h1>
           <p className="mt-4 max-w-2xl text-lg text-slate-300">Plan your next course, stay focused, and see your learning momentum at a glance.</p>
