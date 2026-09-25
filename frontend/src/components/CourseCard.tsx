@@ -1,4 +1,5 @@
 import type { Course } from "../types";
+import { localeForDates, useLanguage } from "../i18n";
 
 interface CourseCardProps {
   course: Course;
@@ -13,18 +14,19 @@ const statusStyles: Record<Course["status"], string> = {
 };
 
 export function CourseCard({ course, onEdit, onDelete }: CourseCardProps) {
-  const formattedDate = new Intl.DateTimeFormat("en", { dateStyle: "medium", timeZone: "UTC" }).format(new Date(`${course.target_date}T00:00:00Z`));
+  const { locale, t } = useLanguage();
+  const formattedDate = new Intl.DateTimeFormat(localeForDates(locale), { dateStyle: "medium", timeZone: "UTC" }).format(new Date(`${course.target_date}T00:00:00Z`));
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
       <div className="flex items-start justify-between gap-4">
         <h3 className="text-lg font-bold text-slate-900">{course.name}</h3>
-        <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${statusStyles[course.status]}`}>{course.status}</span>
+        <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${statusStyles[course.status]}`}>{t.statuses[course.status]}</span>
       </div>
       <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">{course.description}</p>
-      <p className="mt-5 text-sm font-medium text-slate-500">Target: <time dateTime={course.target_date}>{formattedDate}</time></p>
+      <p className="mt-5 text-sm font-medium text-slate-500">{t.card.target}: <time dateTime={course.target_date}>{formattedDate}</time></p>
       <div className="mt-5 flex gap-3 border-t border-slate-100 pt-4">
-        <button onClick={() => onEdit(course)} className="rounded-lg px-3 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-50">Edit</button>
-        <button onClick={() => onDelete(course)} className="rounded-lg px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-50">Delete</button>
+        <button onClick={() => onEdit(course)} className="rounded-lg px-3 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-50">{t.card.edit}</button>
+        <button onClick={() => onDelete(course)} className="rounded-lg px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-50">{t.card.delete}</button>
       </div>
     </article>
   );

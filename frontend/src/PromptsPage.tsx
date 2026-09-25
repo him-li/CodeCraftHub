@@ -1,25 +1,11 @@
 import { SiteNav } from './components/SiteNav';
-import { promptShowcase } from './content/prompts';
-
-const principles = [
-	[
-		'01',
-		'Give context',
-		'Define the product goal, audience, constraints, and current project state.',
-	],
-	[
-		'02',
-		'Create feedback loops',
-		'Ask AI to build, test, inspect evidence, and improve—not only generate code.',
-	],
-	[
-		'03',
-		'Keep human judgment',
-		'Review trade-offs, reject weak suggestions, and make the final product decisions.',
-	],
-];
+import { getLocalizedPromptItem, promptShowcase } from './content/prompts';
+import { useLanguage } from './i18n';
 
 export default function PromptsPage() {
+	const { locale, t } = useLanguage();
+	const localizedPrompts = promptShowcase.map((item) => getLocalizedPromptItem(item, locale));
+
 	return (
 		<main className='min-h-screen bg-slate-50 text-slate-900'>
 			<header className='relative overflow-hidden bg-slate-950 text-white'>
@@ -28,25 +14,23 @@ export default function PromptsPage() {
 					<SiteNav current='prompts' />
 					<div className='mx-auto max-w-6xl px-5 pb-20 pt-14 sm:pb-28 sm:pt-20'>
 						<p className='text-sm font-bold uppercase tracking-[0.25em] text-violet-300'>
-							Prompt engineering case study
+							{t.prompts.eyebrow}
 						</p>
 						<h1 className='mt-5 max-w-4xl text-4xl font-black tracking-tight sm:text-6xl lg:text-7xl'>
-							The prompts behind the product.
+							{t.prompts.title}
 						</h1>
 						<p className='mt-6 max-w-2xl text-lg leading-8 text-slate-300'>
-							A transparent record of how I used AI as a development partner—from
-							product framing and interface generation to testing, debugging, and
-							deployment.
+							{t.prompts.subtitle}
 						</p>
 						<div className='mt-10 flex flex-wrap gap-3 text-sm font-semibold'>
 							<span className='rounded-full border border-white/15 bg-white/5 px-4 py-2'>
-								{promptShowcase.length} prompt stages
+								{promptShowcase.length} {t.prompts.stages}
 							</span>
 							<span className='rounded-full border border-white/15 bg-white/5 px-4 py-2'>
-								Human-directed workflow
+								{t.prompts.humanDirected}
 							</span>
 							<span className='rounded-full border border-white/15 bg-white/5 px-4 py-2'>
-								Evidence-driven iteration
+								{t.prompts.evidenceDriven}
 							</span>
 						</div>
 					</div>
@@ -57,22 +41,20 @@ export default function PromptsPage() {
 				<section aria-labelledby='approach-title'>
 					<div className='max-w-2xl'>
 						<p className='text-sm font-bold uppercase tracking-widest text-violet-600'>
-							My approach
+							{t.prompts.approach}
 						</p>
 						<h2
 							id='approach-title'
 							className='mt-2 text-3xl font-black tracking-tight sm:text-4xl'
 						>
-							Vibe coding with structure.
+							{t.prompts.approachTitle}
 						</h2>
 						<p className='mt-4 leading-7 text-slate-600'>
-							The quality of an AI-built product depends on the quality of its context
-							and feedback loops. These three principles shaped every prompt in this
-							project.
+							{t.prompts.approachBody}
 						</p>
 					</div>
 					<div className='mt-10 grid gap-5 md:grid-cols-3'>
-						{principles.map(([number, title, description]) => (
+						{t.prompts.principles.map(([number, title, description]) => (
 							<article
 								key={number}
 								className='rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'
@@ -89,26 +71,22 @@ export default function PromptsPage() {
 					<div className='flex flex-col justify-between gap-5 sm:flex-row sm:items-end'>
 						<div className='max-w-2xl'>
 							<p className='text-sm font-bold uppercase tracking-widest text-violet-600'>
-								Prompt library
+								{t.prompts.library}
 							</p>
 							<h2
 								id='prompt-library-title'
 								className='mt-2 text-3xl font-black tracking-tight sm:text-4xl'
 							>
-								From idea to deployment.
+								{t.prompts.libraryTitle}
 							</h2>
 						</div>
 						<p className='max-w-sm text-sm leading-6 text-slate-500'>
-							Replace the placeholder copy in{' '}
-							<code className='rounded bg-slate-200 px-1.5 py-1 text-slate-700'>
-								frontend/src/content/prompts.ts
-							</code>{' '}
-							with your real prompts.
+							{t.prompts.editHint}
 						</p>
 					</div>
 
 					<div className='mt-10 space-y-8'>
-						{promptShowcase.map((item) => (
+						{localizedPrompts.map((item) => (
 							<article
 								key={item.id}
 								className='overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm'
@@ -117,7 +95,7 @@ export default function PromptsPage() {
 									<div className='bg-slate-950 p-7 text-white sm:p-9'>
 										<div className='flex items-center justify-between gap-4'>
 											<span className='font-mono text-sm font-bold text-violet-300'>
-												PROMPT {item.id}
+												{t.prompts.promptNumber} {item.id}
 											</span>
 											<span className='rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-300'>
 												{item.phase}
@@ -143,9 +121,9 @@ export default function PromptsPage() {
 									<div className='space-y-7 p-7 sm:p-9'>
 										<div>
 											<p className='text-xs font-black uppercase tracking-[0.2em] text-violet-600'>
-												The prompt
+												{t.prompts.promptLabel}
 											</p>
-											<pre className='mt-3 min-h-36 whitespace-pre-wrap rounded-2xl border border-violet-100 bg-violet-50/70 p-5 font-mono text-sm leading-6 text-slate-700'>
+											<pre dir='ltr' className='mt-3 min-h-36 whitespace-pre-wrap rounded-2xl border border-violet-100 bg-violet-50/70 p-5 text-left font-mono text-sm leading-6 text-slate-700'>
 												{item.prompt}
 											</pre>
 										</div>
@@ -158,11 +136,10 @@ export default function PromptsPage() {
 
 				<section className='rounded-3xl bg-linear-to-br from-violet-600 to-indigo-700 p-8 text-white shadow-2xl shadow-violet-200 sm:p-12'>
 					<p className='text-sm font-bold uppercase tracking-[0.2em] text-violet-200'>
-						The takeaway
+					{t.prompts.takeaway}
 					</p>
 					<blockquote className='mt-5 max-w-4xl text-2xl font-black leading-tight tracking-tight sm:text-4xl'>
-						“AI accelerated the implementation. Clear intent, critical review, and
-						repeated verification shaped the product.”
+					{t.prompts.quote}
 					</blockquote>
 				</section>
 			</div>

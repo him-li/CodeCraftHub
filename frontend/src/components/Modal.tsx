@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react";
+import { useLanguage } from "../i18n";
 
 interface ModalProps {
   title: string;
@@ -7,6 +8,7 @@ interface ModalProps {
 }
 
 export function Modal({ title, children, onClose }: ModalProps) {
+  const { t } = useLanguage();
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && onClose();
     document.addEventListener("keydown", closeOnEscape);
@@ -18,7 +20,7 @@ export function Modal({ title, children, onClose }: ModalProps) {
       <section role="dialog" aria-modal="true" aria-labelledby="modal-title" className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
         <div className="mb-6 flex items-center justify-between">
           <h2 id="modal-title" className="text-xl font-bold text-slate-900">{title}</h2>
-          <button onClick={onClose} aria-label="Close dialog" className="grid size-10 place-items-center rounded-full text-xl text-slate-500 hover:bg-slate-100">×</button>
+          <button onClick={onClose} aria-label={t.modal.close} className="grid size-10 place-items-center rounded-full text-xl text-slate-500 hover:bg-slate-100">×</button>
         </div>
         {children}
       </section>

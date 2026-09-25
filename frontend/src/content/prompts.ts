@@ -117,3 +117,122 @@ Error handling:
 		tags: ['Vercel', 'Debugging', 'Production'],
 	},
 ];
+
+const simplifiedChinesePrompts: Record<string, string> = {
+	'01': '我想创建一个名为 CodeCraftHub 的简易个性化学习平台，开发者可以在其中追踪想要学习的课程。要求：- 使用 Node.js 和 Express 框架 - 将课程数据存储在简单的 JSON 文本文件中（不需要数据库）- 不需要身份验证或用户管理 - 重点学习 REST API 基础知识。每门课程应记录：- 课程名称 - 描述 - 目标完成日期 - 当前状态（未开始、进行中、已完成）。请推荐：1. 适合初学者的简单项目结构 2. 需要创建的 REST API 端点 3. 如何在 JSON 文件中存储和读取数据。',
+	'02': '现在请为 app.js 创建完整的 Node.js Express 代码，要求如下：1. 创建包含课程全部 CRUD 操作的 Express REST API 2. 将数据存储在名为 courses.json 的 JSON 文件中 3. 包含以下端点：POST /api/courses（添加课程）、GET /api/courses（获取全部课程）、GET /api/courses/{id}（获取指定课程）、PUT /api/courses/{id}（更新课程）、DELETE /api/courses/{id}（删除课程）4. 每门课程必须包含：id（从 1 开始自动生成）、name（必填）、description（必填）、target_date（必填，YYYY-MM-DD 格式）、status（必填，只能为“Not Started”“In Progress”或“Completed”）、created_at（自动生成时间戳）5. 正确处理缺少必填字段、课程不存在、无效状态值及文件读写错误 6. 添加适合初学者的说明性注释 7. 如果 courses.json 不存在则自动创建 8. 服务器运行在 5000 端口。',
+	'03': `创建一个带有 API 操作的学习管理仪表盘。
+
+要求：
+
+1. 使用包含内嵌 CSS 和 JavaScript 的单个 HTML 文件
+2. 使用表格或卡片布局显示所有课程
+3. 包含添加新课程的表单
+4. 支持行内或弹窗编辑课程
+5. 每门课程都包含删除按钮
+6. 使用原生 JavaScript（不使用 React 等框架）
+7. 使用基础 CSS 样式（不使用 Bootstrap 等框架）
+8. 只生成一个包含全部 JS 和 CSS 的 HTML 文件
+9. 重点实现后端 API 调用
+10. 不使用任何数据库
+
+技术细节：
+
+- API 基础地址：[YOUR_BACKEND_URL]/api/courses
+- 所有 API 调用都应处理加载状态和错误
+
+需要实现的 API 端点：
+
+1. GET /api/courses — 获取所有课程
+2. POST /api/courses — 创建新课程（请求体：name、description、target_date、status）
+3. PUT /api/courses/{id} — 更新课程（请求体：需要更新的任意字段）
+4. DELETE /api/courses/{id} — 删除课程
+
+课程字段：
+
+- id（只读，由后端自动生成）
+- name（必填，文本输入框）
+- description（必填，多行文本框）
+- target_date（必填，日期输入框，格式为 YYYY-MM-DD）
+- status（必填，下拉选项：“Not Started”“In Progress”“Completed”）
+- created_at（只读，显示为格式化日期）
+
+设计：
+
+- 标题/页眉为“CodeCraftHub: Your Learning Management Platform”
+- 页面顶部放置包含全部字段的“添加课程”表单
+- 下方显示课程列表
+- 每门课程包含 Edit 和 Remove 按钮
+- 使用简洁干净的表格或卡片布局
+- 获取或保存数据时显示加载动画
+- 所有操作显示成功或错误消息
+- 支持移动设备响应式布局
+
+颜色：
+
+- 使用专业的紫色/琥珀色主题：
+  - #8B5CF6 作为主色
+  - #F59E0B 表示成功
+  - #EF4444 表示删除
+
+错误处理：
+
+- API 调用失败时显示错误
+- 提交前验证所有必填字段
+- 显示用户友好的错误消息`,
+	'04': '创建该 Node.js 项目的 package.json 文件：项目名称 codecrafthub、版本 1.0.0、描述“个人学习目标追踪 API”、依赖 express，并添加运行 app.js 的 start 脚本。另外创建 README.md，包含项目概览、功能、安装说明、运行方法、带示例的 API 端点文档和故障排除章节。最后测试并验证：1. 所有端点返回正确响应 2. 数据能够持久保存到 courses.json 3. 错误处理正常工作。',
+	'05': '将应用部署到 Vercel。确保：1. 应用可在 Vercel 上正常运行 2. 所有 API 端点均可访问 3. courses.json 文件能够被正确创建和更新 4. 解决所有部署错误。',
+};
+
+const traditionalChinesePrompts: Record<string, string> = {
+	'01': '我想建立一個名為 CodeCraftHub 的簡易個人化學習平台，讓開發者追蹤想學習的課程。需求：- 使用 Node.js 與 Express 框架 - 將課程資料儲存在簡單的 JSON 文字檔中（不需要資料庫）- 不需要身分驗證或使用者管理 - 專注於學習 REST API 基礎。每門課程應記錄：- 課程名稱 - 描述 - 目標完成日期 - 目前狀態（尚未開始、進行中、已完成）。請建議：1. 適合初學者的簡單專案結構 2. 需要建立的 REST API 端點 3. 如何在 JSON 檔案中儲存及讀取資料。',
+	'02': '現在請為 app.js 建立完整的 Node.js Express 程式碼，需求如下：1. 建立包含課程全部 CRUD 操作的 Express REST API 2. 將資料儲存在名為 courses.json 的 JSON 檔案中 3. 包含以下端點：POST /api/courses（新增課程）、GET /api/courses（取得全部課程）、GET /api/courses/{id}（取得指定課程）、PUT /api/courses/{id}（更新課程）、DELETE /api/courses/{id}（刪除課程）4. 每門課程必須包含：id（從 1 開始自動產生）、name（必填）、description（必填）、target_date（必填，YYYY-MM-DD 格式）、status（必填，只能是「Not Started」「In Progress」或「Completed」）、created_at（自動產生時間戳記）5. 正確處理缺少必填欄位、找不到課程、無效狀態值及檔案讀寫錯誤 6. 加入適合初學者的說明註解 7. 若 courses.json 不存在則自動建立 8. 伺服器執行於 5000 連接埠。',
+	'03': simplifiedChinesePrompts['03'].replaceAll('创建', '建立').replaceAll('课程', '課程').replaceAll('显示', '顯示').replaceAll('数据', '資料').replaceAll('错误', '錯誤').replaceAll('调用', '呼叫').replaceAll('请求体', '請求內容').replaceAll('字段', '欄位').replaceAll('用户', '使用者').replaceAll('支持', '支援').replaceAll('响应式', '響應式').replaceAll('下拉选项', '下拉選項').replaceAll('获取', '取得').replaceAll('删除', '刪除').replaceAll('更新', '更新').replaceAll('加载', '載入').replaceAll('页面', '頁面').replaceAll('颜色', '顏色').replaceAll('专业', '專業').replaceAll('验证', '驗證').replaceAll('消息', '訊息'),
+	'04': '建立此 Node.js 專案的 package.json 檔案：專案名稱 codecrafthub、版本 1.0.0、描述「個人學習目標追蹤 API」、相依套件 express，並加入執行 app.js 的 start 指令碼。另外建立 README.md，包含專案概覽、功能、安裝說明、執行方法、附範例的 API 端點文件及疑難排解章節。最後測試並驗證：1. 所有端點回傳正確回應 2. 資料可持久儲存至 courses.json 3. 錯誤處理正常運作。',
+	'05': '將應用程式部署至 Vercel。確保：1. 應用程式可在 Vercel 正常執行 2. 所有 API 端點均可存取 3. courses.json 檔案能正確建立與更新 4. 解決所有部署錯誤。',
+};
+
+export function getLocalizedPrompt(id: string, locale: string, fallback: string) {
+	if (locale === 'zh-CN') return simplifiedChinesePrompts[id] ?? fallback;
+	if (locale === 'zh-TW') return traditionalChinesePrompts[id] ?? fallback;
+	return fallback;
+}
+
+const localizedMetadata: Record<string, Record<string, Pick<PromptShowcaseItem, 'phase' | 'title' | 'context'>>> = {
+	'zh-CN': {
+		'01': { phase: '需求探索', title: '定义产品与约束', context: '展示如何让 AI 理解产品问题、目标用户及范围限制。' },
+		'02': { phase: '系统架构', title: '设计全栈项目结构', context: '展示如何要求 AI 连接前端、API 与 JSON 文件存储。' },
+		'03': { phase: '界面生成', title: '使用 Bolt 创建初版仪表盘', context: '记录提供给 Bolt.new 的视觉方向、交互需求与技术限制。' },
+		'04': { phase: '测试验证', title: '测试完整用户流程', context: '展示如何让 AI 超越编译检查，验证真实用户操作流程。' },
+		'05': { phase: '部署上线', title: '在 Vercel 上发布与调试', context: '记录用于部署、检查失败及修复路由的 Prompt 流程。' },
+	},
+	'zh-TW': {
+		'01': { phase: '需求探索', title: '定義產品與限制', context: '展示如何讓 AI 理解產品問題、目標使用者及範圍限制。' },
+		'02': { phase: '系統架構', title: '設計全端專案結構', context: '展示如何要求 AI 連接前端、API 與 JSON 檔案儲存。' },
+		'03': { phase: '介面生成', title: '使用 Bolt 建立初版儀表板', context: '記錄提供給 Bolt.new 的視覺方向、互動需求與技術限制。' },
+		'04': { phase: '測試驗證', title: '測試完整使用者流程', context: '展示如何讓 AI 超越編譯檢查，驗證真實使用者操作流程。' },
+		'05': { phase: '部署上線', title: '在 Vercel 發布與除錯', context: '記錄用於部署、檢查失敗及修正路由的 Prompt 流程。' },
+	},
+	he: {
+		'01': { phase: 'גילוי', title: 'הגדרת המוצר והמגבלות', context: 'כיצד הוגדרו עבור ה-AI הבעיה, קהל היעד ומגבלות הפרויקט.' },
+		'02': { phase: 'ארכיטקטורה', title: 'תכנון מבנה ה-Full-stack', context: 'כיצד התבקש ה-AI לחבר בין הממשק, ה-API ואחסון JSON.' },
+		'03': { phase: 'יצירת ממשק', title: 'יצירת לוח הבקרה הראשון עם Bolt', context: 'הכיוון החזותי, דרישות האינטראקציה והמגבלות שניתנו ל-Bolt.new.' },
+		'04': { phase: 'אימות', title: 'בדיקת מסלול המשתמש המלא', context: 'כיצד התבקש ה-AI לבדוק התנהגות משתמש אמיתית מעבר לקומפילציה.' },
+		'05': { phase: 'פריסה', title: 'פריסה וניפוי שגיאות ב-Vercel', context: 'רצף הפרומפטים ששימש לפריסה, חקירת כשלים ותיקון ניתוב.' },
+	},
+	ar: {
+		'01': { phase: 'الاستكشاف', title: 'تحديد المنتج والقيود', context: 'كيف تم توضيح المشكلة والجمهور والقيود للذكاء الاصطناعي.' },
+		'02': { phase: 'البنية', title: 'تصميم بنية التطبيق الكامل', context: 'كيف طُلب من الذكاء الاصطناعي ربط الواجهة وواجهة API وتخزين JSON.' },
+		'03': { phase: 'إنشاء الواجهة', title: 'إنشاء لوحة التحكم الأولى باستخدام Bolt', context: 'التوجيه البصري ومتطلبات التفاعل والقيود المقدمة إلى Bolt.new.' },
+		'04': { phase: 'التحقق', title: 'اختبار رحلة المستخدم كاملة', context: 'كيف طُلب من الذكاء الاصطناعي اختبار سلوك المستخدم الحقيقي بعد التجميع.' },
+		'05': { phase: 'النشر', title: 'النشر والتصحيح على Vercel', context: 'تسلسل الأوامر المستخدم للنشر وفحص الأعطال وتصحيح التوجيه.' },
+	},
+};
+
+export function getLocalizedPromptItem(item: PromptShowcaseItem, locale: string): PromptShowcaseItem {
+	return {
+		...item,
+		...(localizedMetadata[locale]?.[item.id] ?? {}),
+		prompt: getLocalizedPrompt(item.id, locale, item.prompt),
+	};
+}
